@@ -57,12 +57,10 @@ export abstract class Entity {
             return;
         }
 
-        const drawX = this.position.x - image.width / 2;
+        const drawX = this.position.x - (image.width * scale) / 2;
         const drawY = this.position.y - image.height / 2;
 
-        this.canvas!.drawImage(image,
-            drawX - (image.width * (scale - 1) / 2),
-            drawY, image.width * scale, image.height * scale);
+        this.canvas!.drawImage(image, drawX, drawY, image.width * scale, image.height * scale);
     }
 
     /**

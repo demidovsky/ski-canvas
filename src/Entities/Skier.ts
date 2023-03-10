@@ -22,7 +22,7 @@ const STARTING_SPEED: number = 10;
 const ACCELERATION: number = 0.05;
 
 /**
- * The skier starts running at this speed. Saved in case speed needs to be reset at any point.
+ * How many moves the skier can fly before landing.
  */
 const JUMP_LENGTH: number = 50;
 
@@ -113,7 +113,7 @@ export class Skier extends Entity {
     }
 
     /**
-     * Is the skier currently in the skiing state
+     * Is the skier currently in the jumping state
      */
     isJumping(): boolean {
         return this.state === STATES.STATE_JUMP;
@@ -161,9 +161,9 @@ export class Skier extends Entity {
         }
 
         if (this.isJumping()) {
-            const progress = this.jumpLength / JUMP_LENGTH;
-            const scale = 2 - Math.abs(progress - 0.5); // scale from 1 to 2 and back
-            const animationStage =  Math.ceil((1 - progress) * 5); // 5 stages of animation
+            const jumpProgress = this.jumpLength / JUMP_LENGTH; // 0 to 1
+            const scale = 2 - Math.abs(jumpProgress - 0.5); // scale from 1 to 2 and back
+            const animationStage =  Math.ceil((1 - jumpProgress) * 5); // 5 stages of animation
             this.imageName = IMAGE_NAMES[`SKIER_JUMP_${animationStage}` as keyof typeof IMAGE_NAMES];
             super.draw(scale);
         } else {

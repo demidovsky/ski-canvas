@@ -78,20 +78,17 @@ export class Game {
         this.canvas = new Canvas(GAME_CANVAS, GAME_WIDTH, GAME_HEIGHT);
         this.imageManager = new ImageManager();
         this.obstacleManager = new ObstacleManager(this.imageManager, this.canvas);
-
-        this.skier = new Skier(0, 0, this.imageManager, this.obstacleManager, this.canvas);
-        this.rhino = new Rhino(-500, -2000, this.imageManager, this.canvas);
-
+        this.setDefaultEntities();
         this.calculateGameWindow();
-        this.obstacleManager.placeInitialObstacles();
     }
 
+    /**
+     * 
+     */
     restart() {
         this.canvas.clearCanvas();
-        this.skier = new Skier(0, 0, this.imageManager, this.obstacleManager, this.canvas);
-        this.rhino = new Rhino(-500, -2000, this.imageManager, this.canvas);
-        this.obstacleManager.placeInitialObstacles();
         this.score = 0;
+        this.setDefaultEntities();
         
         if (!this.isRunning) {
             this.isRunning = true;
@@ -100,6 +97,18 @@ export class Game {
         
     }
 
+    /**
+     * Set the default entities for the game
+     */
+    setDefaultEntities() {
+        this.skier = new Skier(0, 0, this.imageManager, this.obstacleManager, this.canvas);
+        this.rhino = new Rhino(-500, -2000, this.imageManager, this.canvas);
+        this.obstacleManager.placeInitialObstacles();
+    }
+
+    /**
+     * Toggle the game between running and paused.
+     */
     playpause() {
         this.isRunning = !this.isRunning;
 
@@ -128,8 +137,6 @@ export class Game {
      */
     run() {
         if (Date.now() - this.lastTimestamp > 1000 / FPS) {
-  
-
             this.canvas.clearCanvas();
 
             this.updateGameWindow();

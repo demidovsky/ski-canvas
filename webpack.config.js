@@ -25,7 +25,6 @@ const config = {
             },
             {
                 test: /\.d.ts$/,
-                // include: [path.join(__dirname, 'src')],
                 use: ['null-loader'],  
             },
         ]
