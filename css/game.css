@@ -2,3 +2,26 @@ html, body {
     margin: 0;
     padding: 0;
 }
+
+body {
+    background: url(./../img/bg.jpeg) repeat-x;
+    background-size: auto 100px;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+canvas {
+    transform: rotateX(40deg) translateY(0%);
+}
+
+canvas[disabled] {
+    filter: grayscale(100%) blur(5px);
+}
+
+.controls {
+    position: absolute;
+    font-size: 50px;
+    padding: 10px;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+}

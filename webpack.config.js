@@ -22,7 +22,11 @@ const config = {
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader'],
-            }
+            },
+            {
+                test: /\.d.ts$/,
+                use: ['null-loader'],  
+            },
         ]
     },
 

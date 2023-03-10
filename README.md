@@ -1,3 +1,52 @@
+
+# The result! 🎉
+
+## What did you do?
+
+⭐ **Basic features**  
+    - Jump on ramp  
+    - Jump on spacebar  
+    - Jump over rocks, not trees
+
+## Did you do any bonus items?
+
+⭐ ⭐ **Bonus items**  
+    - Restart  
+    - Play/Pause  
+    - Score  
+    - Increase speed  
+    - Deployed: http://136.244.87.55/  
+    - Tests  
+
+⭐ ⭐ ⭐ **And some extra:**  
+    - Scaling skier's animation when jumping  
+    - Some background and 3d transform to improve visual  
+    - Docker image (using nginx to serve static build - the most lightweight solution)  
+
+## Are there any known bugs?
+
+When crashing on the rock, you may recover by jumping, and continue skiing, slowly :) Not intended, but funny.
+
+  
+
+## Tell us how to run it, either locally or through a cloud provider.
+
+### Locally:
+
+```npm i && npm run dev```  
+or  
+```npm build && npm start```  
+or  
+```npm build && npm run docker:build && npm run docker:run```  
+
+http://localhost:8080/
+
+### Cloud:
+
+http://136.244.87.55/
+
+
+
 # Ceros Ski Code Challenge - TypeScript Edition
 
 Welcome to the Ceros Ski Code Challenge!
@@ -41,13 +90,13 @@ it better! Your solution can only gain from having a better foundation.
   need do is make them jump. 
 
   Acceptance Criteria:
-  * Jump ramps are added to the game world and appear randomly as the skier skis.
-  * The skier should enter the jumping state when they hit the jump ramp.
-  * The skier should also enter the jumping state when the user presses the spacebar.
-  * The skier should do a flip while jumping, at least one cycle through the jump images provided.
+  * ✓ Jump ramps are added to the game world and appear randomly as the skier skis.
+  * ✓ The skier should enter the jumping state when they hit the jump ramp. 
+  * ✓ The skier should also enter the jumping state when the user presses the spacebar.
+  * ✓ The skier should do a flip while jumping, at least one cycle through the jump images provided.
   * While jumping, the skier should be able to jump over some obstacles: 
-    * Rocks can be jumped over
-    * Trees can NOT be jumped over
+    * ✓ Rocks can be jumped over 
+    * ✓ Trees can NOT be jumped over 
 
 * **Documentation:**
 
@@ -82,11 +131,12 @@ code before taking on any of the bonus.*
 If you're having fun with this, feel free to add more to it. Here's some ideas or come up with your own. We love seeing 
 how creative candidates get with this.
  
-* Provide a way to reset the game once it's over
-* Provide a way to pause and resume the game
-* Add a score that increments as the skier skis further
-* Increase the difficulty the longer the skier skis (increase speed, increase obstacle frequency, etc.)
-* Deploy the game to a server so that we can play it without having to install it locally
-* Write unit tests for your code
+* ✓ Provide a way to reset the game once it's over
+* ✓ Provide a way to pause and resume the game
+* ✓ Add a score that increments as the skier skis further
+* ✓ Increase the difficulty the longer the skier skis (increase speed, increase obstacle frequency, etc.)
+* ✓ Deploy the game to a server so that we can play it without having to install it locally
+* ✓ Write unit tests for your code
 
 We are looking forward to see what you come up with!!
+

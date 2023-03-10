@@ -16,12 +16,12 @@ export abstract class Entity {
     /**
      * Stored reference to the ImageManager
      */
-    imageManager: ImageManager;
+    imageManager: ImageManager | null = null;
 
     /**
      * Stored reference to the Canvas entity is drawn to
      */
-    canvas: Canvas;
+    canvas: Canvas | null = null;
 
     /**
      * The name of the current image being displayed for the entity.
@@ -31,10 +31,14 @@ export abstract class Entity {
     /**
      * Initialize the entities position.
      */
-    constructor(x: number, y: number, imageManager: ImageManager, canvas: Canvas) {
+    constructor(x: number, y: number, imageManager: ImageManager | null, canvas?: Canvas | null) {
         this.position = new Position(x, y);
-        this.imageManager = imageManager;
-        this.canvas = canvas;
+        if (imageManager) {
+            this.imageManager = imageManager;
+        }
+        if (canvas) {
+            this.canvas = canvas;
+        }
     }
 
     /**
@@ -47,23 +51,23 @@ export abstract class Entity {
     /**
      * Draw the entity to the canvas centered on the X,Y position.
      */
-    draw() {
-        const image = this.imageManager.getImage(this.imageName);
+    draw(scale: number = 1.0) {
+        const image = this.imageManager!.getImage(this.imageName);
         if(!image) {
             return;
         }
 
-        const drawX = this.position.x - image.width / 2;
+        const drawX = this.position.x - (image.width * scale) / 2;
         const drawY = this.position.y - image.height / 2;
 
-        this.canvas.drawImage(image, drawX, drawY, image.width, image.height);
+        this.canvas!.drawImage(image, drawX, drawY, image.width * scale, image.height * scale);
     }
 
     /**
      * Return a bounding box in world space coordinates for the entity based upon the current image displayed.
      */
     getBounds(): Rect | null {
-        const image = this.imageManager.getImage(this.imageName);
+        const image = this.imageManager!.getImage(this.imageName);
         if(!image) {
             return null;
         }
