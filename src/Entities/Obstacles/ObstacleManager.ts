@@ -3,7 +3,7 @@
  * obstacles, places new obstacles as the skier moves throughout the world and displays them all to the screen.
  */
 
-import { GAME_WIDTH, GAME_HEIGHT } from '../../Constants';
+import { GAME_WIDTH, GAME_HEIGHT, IMAGE_NAMES } from '../../Constants';
 import { Canvas } from "../../Core/Canvas";
 import { ImageManager } from "../../Core/ImageManager";
 import { Position, randomInt, Rect} from '../../Core/Utils';
@@ -39,19 +39,23 @@ export class ObstacleManager {
     /**
      * Stored reference to the ImageManager
      */
-    imageManager: ImageManager;
+    imageManager: ImageManager | null = null;
 
     /**
      * Stored reference to the Canvas obstacles are drawn to
      */
-    canvas: Canvas;
+    canvas: Canvas | null = null;
 
     /**
      * Init the Obstacle Manager.
      */
-    constructor(imageManager: ImageManager, canvas: Canvas) {
-        this.imageManager = imageManager;
-        this.canvas = canvas;
+    constructor(imageManager: ImageManager | null, canvas: Canvas | null) {
+        if (imageManager) {
+            this.imageManager = imageManager;
+        }
+        if (canvas) {
+            this.canvas = canvas;
+        }
     }
 
     getObstacles(): Obstacle[] {
@@ -80,6 +84,8 @@ export class ObstacleManager {
             GAME_WIDTH / 2,
             GAME_HEIGHT / 2
         );
+
+        this.obstacles = [];
 
         for(let i = 0; i < numberObstacles; i++) {
             this.placeRandomObstacle(placementArea);
@@ -161,6 +167,17 @@ export class ObstacleManager {
 
         this.obstacles.push(newObstacle);
     }
+
+
+    /**
+     * Place an obstacle of given type at the given position
+     */
+    placeObstacle(x: number, y: number, type: IMAGE_NAMES) {
+        const newObstacle = new Obstacle(x, y, this.imageManager, this.canvas);
+        newObstacle.setType(type);
+        this.obstacles.push(newObstacle);
+    }
+
 
     /**
      * Find a position within the passed in area to place an obstacle, ensuring that the obstacle is

@@ -10,6 +10,8 @@ import { ObstacleManager } from "../Entities/Obstacles/ObstacleManager";
 import { Rhino } from "../Entities/Rhino";
 import { Skier} from "../Entities/Skier";
 
+const FPS = 45;
+
 export class Game {
     /**
      * The canvas the game will be displayed on
@@ -41,9 +43,30 @@ export class Game {
     private rhino!: Rhino;
 
     /**
+     * Is running or paused?
+    */
+    private isRunning: boolean = true;
+
+    /**
+     * The last time the game loop was run
+    */
+    private lastTimestamp: number = 0;
+
+    /**
+     * Current score
+     */
+    private score: number = 0;
+
+    /**
+     * The score display element
+     */
+    private readonly scoreElement: HTMLElement;
+
+    /**
      * Initialize the game and setup any input handling needed.
      */
-    constructor() {
+    constructor(scoreElement: HTMLElement) {
+        this.scoreElement = scoreElement;
         this.init();
         this.setupInputHandling();
     }
@@ -61,6 +84,28 @@ export class Game {
 
         this.calculateGameWindow();
         this.obstacleManager.placeInitialObstacles();
+    }
+
+    restart() {
+        this.canvas.clearCanvas();
+        this.skier = new Skier(0, 0, this.imageManager, this.obstacleManager, this.canvas);
+        this.rhino = new Rhino(-500, -2000, this.imageManager, this.canvas);
+        this.obstacleManager.placeInitialObstacles();
+        this.score = 0;
+        
+        if (!this.isRunning) {
+            this.isRunning = true;
+            this.run();
+        }
+        
+    }
+
+    playpause() {
+        this.isRunning = !this.isRunning;
+
+        if (this.isRunning) {
+            this.run();
+        }
     }
 
     /**
@@ -82,12 +127,25 @@ export class Game {
      * The main game loop. Clear the screen, update the game objects and then draw them.
      */
     run() {
-        this.canvas.clearCanvas();
+        if (Date.now() - this.lastTimestamp > 1000 / FPS) {
+  
 
-        this.updateGameWindow();
-        this.drawGameWindow();
+            this.canvas.clearCanvas();
 
-        requestAnimationFrame(this.run.bind(this));
+            this.updateGameWindow();
+            this.drawGameWindow();
+
+            if (this.skier.isSkiing() || this.skier.isJumping()) {
+                this.score++;
+                this.scoreElement.innerHTML = this.score.toString();
+            }
+
+            this.lastTimestamp = Date.now();
+        }
+
+        if (this.isRunning) {
+            requestAnimationFrame(this.run.bind(this));
+        }
     }
 
     /**
