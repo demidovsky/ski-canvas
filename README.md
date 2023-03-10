@@ -1,3 +1,52 @@
+
+# The result! 🎉
+
+## What did you do?
+
+⭐ **Basic features**  
+    - Jump on ramp  
+    - Jump on spacebar  
+    - Jump over rocks, not trees
+
+## Did you do any bonus items?
+
+⭐ ⭐ **Bonus items**  
+    - Restart  
+    - Play/Pause  
+    - Score  
+    - Increase speed  
+    - Deployed: http://136.244.87.55/  
+    - Tests  
+
+⭐ ⭐ ⭐ **And some extra:**  
+    - Scaling skier's animation when jumping  
+    - Some background and 3d transform to improve visual  
+    - Docker image (using nginx to serve static build - the most lightweight solution)  
+
+## Are there any known bugs?
+
+When crashing on the rock, you may recover by jumping, and continue skiing, slowly :) Not intended, but funny.
+
+  
+
+## Tell us how to run it, either locally or through a cloud provider.
+
+### Locally:
+
+```npm i && npm run dev```  
+or  
+```npm build && npm start```  
+or  
+```npm build && npm run docker:build && npm run docker:run```  
+
+http://localhost:8080/
+
+### Cloud:
+
+http://136.244.87.55/
+
+
+
 # Ceros Ski Code Challenge - TypeScript Edition
 
 Welcome to the Ceros Ski Code Challenge!
@@ -91,7 +140,3 @@ how creative candidates get with this.
 
 We are looking forward to see what you come up with!!
 
-
-# The result! 🎉
-
-http://136.244.87.55/
